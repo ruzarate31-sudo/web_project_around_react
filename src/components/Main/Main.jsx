@@ -26,10 +26,6 @@ const cards = [
   },
 ];
 
-console.log(cards);
-
-
-
 
 export default function Main() {
   const [popup, setPopup] = useState(null);
@@ -50,7 +46,6 @@ export default function Main() {
   };
 
   function handleOpenPopup(popup) {
-    console.log("ABRIENDO:", popup);
     setPopup(popup);
   }
 
@@ -58,7 +53,6 @@ export default function Main() {
   setPopup(null);
 }
 
-console.log("POPUP STATE:", popup);
 
 return (
   <main className="content">
