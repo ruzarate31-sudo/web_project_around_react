@@ -1,16 +1,85 @@
-# React + Vite
+# Around The U.S. - React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+Around The U.S. es una aplicación web desarrollada con React que permite a los usuarios administrar un perfil personal e interactuar con una colección de tarjetas de lugares.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Los usuarios pueden:
 
-## React Compiler
+- Editar su información de perfil.
+- Cambiar su foto de avatar.
+- Agregar nuevas tarjetas.
+- Dar y quitar "Me gusta" a las tarjetas.
+- Eliminar tarjetas.
+- Visualizar las imágenes en una ventana emergente.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+La aplicación obtiene y actualiza la información mediante una API REST.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tecnologías utilizadas
+
+- React
+- Vite
+- JavaScript (ES6+)
+- JSX
+- CSS
+- HTML5
+- Context API
+- React Hooks
+  - useState
+  - useEffect
+  - useContext
+  - useRef
+
+---
+
+## Funcionalidades
+
+- Carga de la información del usuario desde la API.
+- Carga inicial de tarjetas.
+- Edición del perfil.
+- Actualización del avatar.
+- Creación de nuevas tarjetas.
+- Eliminar tarjetas.
+- Dar y quitar "Me gusta".
+- Ventanas emergentes reutilizables.
+- Administración del estado con React.
+- Compartición de información del usuario mediante Context.
+
+---
+
+## Instalación
+
+Clona el repositorio:
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+```
+
+Instala las dependencias:
+
+```bash
+npm install
+```
+
+Ejecuta el proyecto:
+
+```bash
+npm run dev
+```
+
+Para crear la versión de producción:
+
+```bash
+npm run build
+```
+
+---
+
+## Autor
+
+Rocio Zarate
+ https://github.com/ruzarate31-sudo/web_project_around_react.git
+
+Proyecto desarrollado como parte del Bootcamp de Desarrollo Web de TripleTen.
