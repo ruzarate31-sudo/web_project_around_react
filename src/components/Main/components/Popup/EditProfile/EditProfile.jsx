@@ -1,28 +1,29 @@
-import {useState, useContext} from "react";
+import {useContext, useEffect} from "react";
+import useFormValidation from "../Hooks/useFormValidation.js";
 import CurrentUserContext from "../../../../../contexts/CurrentUserContext";
 
 export default function EditProfile(props) {
 
      const { currentUser, handleUpdateUser } = useContext(CurrentUserContext);
-     const [name, setName] = useState(currentUser.name);
-     const [description, setDescription] = useState(currentUser.about);
    
-     const handleNameChange = (event) => {
-     setName(event.target.value);
-   };
+     const { values, errors, isValid, handleChange, resetForm, setValues } = useFormValidation({ name: currentUser.name || "", description: currentUser.about || ""    });
+    
 
-      const handleDescriptionChange = (event) => {
-     setDescription(event.target.value); 
-     }; 
+     useEffect(() => {
+     setValues({
+    name: currentUser.name || "",
+    description: currentUser.about || "",
+    });
+    }, [currentUser, setValues]);
 
    function handleSubmit(event) {
     event.preventDefault();
 
     handleUpdateUser({
-    name,
-    about: description,
-    });
-   }
+    name: values.name,
+    about: values.description,
+   });
+  }
 
     return (
         <form className="popup__form"
@@ -33,17 +34,19 @@ export default function EditProfile(props) {
             <h2 className="popup__title">{props.title}</h2>
             <label className="popup__field">
                 <input
-                  className="popup__input popup__input_type_name"
-                  name="name"
-                  placeholder="Nombre"
-                  type="text"
-                    required
-                    minLength="2"
-                    maxLength="40"
-                    value={name}
-                    onChange={handleNameChange}
+                className="popup__input popup__input_type_name"
+                name="name"
+                placeholder="Nombre"
+                type="text"
+                required
+                minLength="2"
+                maxLength="40"
+                value={values.name || ""}
+                onChange={handleChange}
                 />
-                <span className="popup__error popup__error_type_name"></span> 
+               <span
+            className={`popup__error popup__error_type_name ${ errors.name ? "popup__error_visible" : "" }`}
+              > {errors.name} </span> 
              </label>
              <label className="popup__field">
                 <input
@@ -54,15 +57,16 @@ export default function EditProfile(props) {
                 required
                 minLength="2"
                 maxLength="200"
-                value={description}
-                onChange={handleDescriptionChange}
+                value={values.description || ""}
+                onChange={handleChange}
                 />
-                <span className="popup__error popup__error_type_description"></span>
+                <span className={`popup__error popup__error_type_description ${ errors.description ? "popup__error_visible" : ""  }`} >{errors.description}</span>
              </label>
 
-             <button 
-                className="button popup__button"
-                type="submit"
+             <button
+             className={`button popup__button ${ !isValid ? "popup__button_disabled" : "" }`}
+             type="submit"
+             disabled={!isValid}
              >
                 Guardar
              </button>

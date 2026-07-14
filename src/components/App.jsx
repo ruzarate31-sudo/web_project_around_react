@@ -12,7 +12,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({}); 
   const [popup, setPopup] = useState(null);
   const [cards, setCards] = useState([]);
-  
+  const [selectedCard, setSelectedCard] = useState(null);
 
 function handleOpenPopup(popup) {
     setPopup(popup);
@@ -50,6 +50,16 @@ function handleOpenPopup(popup) {
   }
  }
 
+ function handleDeleteClick(card) {
+  setSelectedCard(card);
+
+  handleOpenPopup({
+    title: "¿Estás seguro?",
+    type: "delete",
+    children: null,
+  });
+} 
+
  async function handleUpdateAvatar(data) {
   try {
     const newData = await api.editAvatar(data.avatar);
@@ -70,7 +80,7 @@ const isLiked = card.isLiked;
     }).catch((error) => console.error(error));
 }
 
-
+ 
 async function handleCardDelete(card) {
   await api
     .deleteCard(card._id)
@@ -78,9 +88,11 @@ async function handleCardDelete(card) {
       setCards((state) =>
         state.filter((currentCard) => currentCard._id !== card._id)
       );
+       handleClosePopup();
+        setSelectedCard(null);
     })
     .catch((error) => console.error(error));
-} 
+}
   
  async function handleAddPlaceSubmit(data) {
   try {
@@ -108,9 +120,11 @@ async function handleCardDelete(card) {
      onClosePopup={handleClosePopup}
      cards={cards}
      onCardLike={handleCardLike}
-     onCardDelete={handleCardDelete}
-     onAddPlaceSubmit={handleAddPlaceSubmit}
-     />
+     onCardDelete={handleDeleteClick}
+     handleCardDelete={handleCardDelete}
+     selectedCard={selectedCard}
+    onAddPlaceSubmit={handleAddPlaceSubmit}
+    />
       <Footer />
     </div>
     

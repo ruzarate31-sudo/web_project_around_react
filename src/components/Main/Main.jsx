@@ -5,6 +5,7 @@ import NewCard from "./components/Popup/NewCard/NewCard.jsx";
 import EditProfile from "./components/Popup/EditProfile/EditProfile.jsx";
 import EditAvatar from "./components/Popup/EditAvatar/EditAvatar.jsx";
 import Card from "./components/Card/Card.jsx";
+import RemoveCard from "./components/Popup/RemoveCard/RemoveCard.jsx";
 
 
 export default function Main(props) {
@@ -16,7 +17,9 @@ export default function Main(props) {
   cards,
   onCardLike,
   onCardDelete,
-  onAddPlaceSubmit, } = props;
+  onAddPlaceSubmit, 
+  selectedCard,
+  handleCardDelete,} = props;
 
   const { currentUser } = useContext(CurrentUserContext);
 
@@ -34,6 +37,17 @@ export default function Main(props) {
     title: "Cambiar foto de perfil",
     children: <EditAvatar />,
   };
+
+  const removeCardPopup = {
+  title: "¿Estás seguro?",
+  type: "delete",
+  children: (
+    <RemoveCard
+      selectedCard={selectedCard}
+      onCardDelete={handleCardDelete}
+    />
+  ),
+};
 
 return (
   <main className="content">
@@ -91,12 +105,16 @@ return (
          </section>
 
         {popup && (
-        <Popup 
-        onClose={onClosePopup} 
-        title={popup.title}>
-          {popup.children}
+        <Popup
+        onClose={onClosePopup}
+        title={popup.title}
+        type={popup.type}
+        >
+       {popup.type === "delete"
+         ? removeCardPopup.children
+         : popup.children}
         </Popup>
-      )}
+     )}
       </main>
   )
 }
