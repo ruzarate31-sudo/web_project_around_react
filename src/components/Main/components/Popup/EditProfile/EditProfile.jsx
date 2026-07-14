@@ -1,5 +1,5 @@
 import {useContext, useEffect} from "react";
-import useFormValidation from "../Hooks/UseFormValidation.js";
+import useFormValidation from "../../../../../hooks/UseFormValidation.js";
 import CurrentUserContext from "../../../../../contexts/CurrentUserContext";
 
 export default function EditProfile(props) {
